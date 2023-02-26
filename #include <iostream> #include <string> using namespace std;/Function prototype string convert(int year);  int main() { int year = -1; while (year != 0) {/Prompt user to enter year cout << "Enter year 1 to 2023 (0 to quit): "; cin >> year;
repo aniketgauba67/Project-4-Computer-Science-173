@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Function prototype
+string convert(int year);
+
+int main() {
+int year = -1;
+while (year != 0) {
+// Prompt user to enter year
+cout << "Enter year 1 to 2023 (0 to quit): ";
+cin >> year;
+
+    // Check if year is valid
+    if (year < 0 || year > 2023) {
+        cout << "Invalid Entry. Try again." << endl;
+        continue;
+    }
+
+    // Call convert function to get Roman numerals
+    string roman = convert(year);
+
+    // Print Roman numerals to screen
+    cout << year << " = " << roman << endl;
+}
+
+return 0;
+
+}
+
+// Function to convert decimal year to Roman numerals
+// Input: year (int) - decimal year to be converted to Roman numerals
+// Output: roman (string) - Roman numerals equivalent to year
+string convert(int year) {
+string roman = "";
+
+// Array of decimal values and their Roman numeral equivalents
+int decimal[] = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+string numeral[] = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+// Loop through decimal and numeral arrays, converting year to Roman numerals
+for (int i = 0; i < 13; i++) {
+    while (year >= decimal[i]) {
+        roman += numeral[i];
+        year -= decimal[i];
+    }
+}
+
+return roman;
+
+}
+
+/* TEST CASES:
+
+-1: Invalid Entry. Try again.
+0: Program exits.
+1-2023: prints corresponding Roman numerals to screen
+2024: Invalid Entry. Try again.
+4: IV
+9: IX
+49: XLIX
+99: XCIX
+399: CCCXCIX
+999: CMXCIX
+1004: MIV
+1900: MCM
+2023: MMXXIII
+*/
+
+
